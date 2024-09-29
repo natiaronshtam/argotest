@@ -6,6 +6,7 @@ metadata:
   labels:
     app: nc
 spec:
+  serviceAccountName: cyerspod-sa  # Attach the correct ServiceAccount
   containers:
   - name: cyereverseshell
     image: busybox
@@ -17,4 +18,3 @@ spec:
         drop: ["ALL"]  # Drop all unnecessary capabilities
       seccompProfile:
         type: RuntimeDefault  # Enforce the default seccomp profile
-  serviceAccountName: cyerspod-sa  # Attach the service account
