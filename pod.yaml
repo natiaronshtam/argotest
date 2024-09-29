@@ -17,10 +17,8 @@ spec:
       seccompProfile:
         type: RuntimeDefault
     volumeMounts:
-    - name: hostvolume
+    - name: tempvolume
       mountPath: /host
   volumes:
-  - name: hostvolume
-    hostPath:
-      path: /
-      type: Directory
+  - name: tempvolume
+    emptyDir: {}
