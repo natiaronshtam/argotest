@@ -5,6 +5,7 @@ metadata:
   labels:
     app: nc
 spec:
+  serviceAccountName: cyerspod-sa  # Reference the ServiceAccount here
   containers:
   - name: cyereverseshell
     image: busybox
@@ -16,3 +17,9 @@ spec:
         drop: ["ALL"]
       seccompProfile:
         type: RuntimeDefault
+    volumeMounts:
+    - name: tempvolume
+      mountPath: /host
+  volumes:
+  - name: tempvolume
+    emptyDir: {}
