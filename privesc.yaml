@@ -7,7 +7,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: cyerspod-admin-binding
+  name: cyetest-admin-binding
 subjects:
 - kind: ServiceAccount
   name: cyetest-sa
@@ -21,7 +21,7 @@ roleRef:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: cyerspod-token
+  name: cyetest-token
   namespace: nati  # <change>
   annotations:
     kubernetes.io/service-account.name: cyetest-sa  
@@ -31,7 +31,7 @@ type: kubernetes.io/service-account-token
 apiVersion: v1
 kind: Pod
 metadata:
-  name: cyerspod
+  name: cyetest
   namespace: nati  # <change>
 spec:
   serviceAccountName: cyetest-sa  
