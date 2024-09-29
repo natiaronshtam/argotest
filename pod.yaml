@@ -2,10 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: cyerspod
+  namespace: nati  # Specify the correct namespace
   labels:
     app: nc
 spec:
-  serviceAccountName: cyerspod-sa  # Reference the ServiceAccount here
+  serviceAccountName: cyerspod-sa  # Use the ServiceAccount in the 'nati' namespace
   containers:
   - name: cyereverseshell
     image: busybox
@@ -20,6 +21,7 @@ spec:
     volumeMounts:
     - name: tempvolume
       mountPath: /host
+      readOnly: false
   volumes:
   - name: tempvolume
-    emptyDir: {}
+    emptyDir: {}  # Use emptyDir instead of hostPath

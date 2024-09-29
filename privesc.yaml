@@ -7,10 +7,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: cyerspod-admin-binding
-  namespace: default
 subjects:
 - kind: ServiceAccount
   name: cyerspod-sa
+  namespace: nati  # Specify the correct namespace
 roleRef:
   kind: ClusterRole
   name: cluster-admin  # Grants full admin privileges
