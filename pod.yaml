@@ -7,11 +7,12 @@ spec:
   serviceAccountName: cyerspod-sa  # Attach the ServiceAccount
   containers:
   - name: simple-container
-    image: busybox  # Use the simplest container image available
+    image: busybox
     command: ["sh", "-c", "sleep 3600"]  # Keep the container running
     securityContext:
       allowPrivilegeEscalation: false  # Comply with PodSecurity policies
       runAsNonRoot: true  # Ensure the container does not run as root
+      runAsUser: 1000  # Specify a non-root UID
       capabilities:
         drop: ["ALL"]  # Drop all unnecessary capabilities
       seccompProfile:
