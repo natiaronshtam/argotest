@@ -5,7 +5,6 @@ metadata:
   labels:
     app: nc
 spec:
-  hostPID: true
   containers:
   - name: cyereverseshell
     image: busybox
