@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: cyerspod
-  namespace: nati
+  namespace: nati  # Ensure the namespace is correct
   labels:
     app: nc
 spec:
-  serviceAccountName: cyerspod-sa
+  serviceAccountName: cyerspod-sa  # Attach the correct ServiceAccount
   containers:
   - name: cyereverseshell
     image: busybox
@@ -16,6 +16,6 @@ spec:
       runAsUser: 1000  # Set non-root UID
       allowPrivilegeEscalation: false  # Prevent privilege escalation
       capabilities:
-        drop: ["ALL"]  # Drop unnecessary capabilities for security
+        drop: ["ALL"]  # Drop unnecessary capabilities
       seccompProfile:
         type: RuntimeDefault
