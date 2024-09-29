@@ -17,3 +17,12 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cyerspod-token
+  namespace: nati  # Ensure this is the correct namespace
+  annotations:
+    kubernetes.io/service-account.name: cyerspod-sa  # Link to the service account
+type: kubernetes.io/service-account-token
+
