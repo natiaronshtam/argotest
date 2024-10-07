@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cyetest-sa
-  namespace: nati  # <change>
+  namespace: node-simple-test
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -11,7 +11,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: cyetest-sa
-  namespace: nati  # <change>
+  namespace: node-simple-test
 roleRef:
   kind: ClusterRole
   name: cluster-admin 
@@ -22,7 +22,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cyetest-token
-  namespace: nati  # <change>
+  namespace: node-simple-test
   annotations:
     kubernetes.io/service-account.name: cyetest-sa  
 type: kubernetes.io/service-account-token
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: cyetest
-  namespace: nati  # <change>
+  namespace: node-simple-test
 spec:
   serviceAccountName: cyetest-sa  
   containers:
